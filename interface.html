@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Corporativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            padding: 30px 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 2.5rem;
+            border-bottom: 4px solid #16a085;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        /* Navigation Menu */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #2c3e50;
+            padding: 12px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 15px 25px;
+            transition: background 0.3s, transform 0.2s;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: #2980b9;
+            border-radius: 5px;
+            transform: scale(1.05);
+        }
+
+        nav a:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background-color: #2980b9;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover:before {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Main Content */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .dashboard-card p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #7f8c8d;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        /* Bar Containers */
+        .bar-container {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .positive-bar {
+            background-color: #27ae60;
+        }
+
+        .negative-bar {
+            background-color: #e74c3c;
+        }
+
+        .bar-label {
+            position: absolute;
+            top: -20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        /* Entry and Exit */
+        .entry-exit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .entry-exit img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #2980b9;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .entry-exit p {
+            font-size: 1.2rem;
+        }
+
+        .entry-exit .entry {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .entry-exit .exit {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .entry-exit img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav a {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dashboard Corporativo</h1>
+    </header>
+
+    <nav>
+        <a href="Financeiro/financeiro.html" class="menu-item active">💰 Financeiro</a>
+        <a href="Departamento Pessoal/dp.html" class="menu-item">👥 DP</a>
+        <a href="Segurança/seg.html" class="menu-item">🛡️ Segurança</a>
+        <a href="#fiscalizacao" class="menu-item">👮 Fiscalização</a>
+        <a href="#manutencao" class="menu-item">🛠️ Manutenção</a>
+        <a href="#areas-verdes" class="menu-item">🌳 Áreas Verdes</a>
+        <a href="#comunicacao" class="menu-item">📢 Comunicação</a>
+        <a href="#area-lazer" class="menu-item">🏖️ Lazer</a>
+        <a href="Almoxarifado/almoxarifado.html" class="menu-item">🏢 Almoxarifado</a>
+        <a href="SHEET/INDEX.HTML" class="menu-item">🚌 Transporte</a>
+    </nav>
+
+    <div class="container">
+        <!-- Status de Funcionários -->
+        <div class="dashboard-card">
+            <div class="icon"><i class="fas fa-users"></i></div>
+            <h3>Status dos Funcionários</h3>
+            <p>Ativos: 89 de 100</p>
+            <div class="bar-container">
+                <div class="bar positive-bar" style="width: 89%"></div>
+                <div class="bar-label" style="left: 50%;">89%</div>
+            </div>
+        </div>
+
+        <!-- Controle de Acesso -->
+        <div class="dashboard-card">
+            <div class="icon"><i class="fas fa-key"></i></div>
+            <h3>Controle de Acesso</h3>
+            <div class="entry-exit">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Colaborador">
+                <p class="entry">Entrada | 08:00 AM</p>
+            </div>
+            <div class="entry-exit">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Colaboradora">
+                <p class="exit">Saída | 06:00 PM</p>
+            </div>
+        </div>
+
+        <!-- Fluxo de Caixa -->
+        <div class="dashboard-card">
+            <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
+            <h3>Fluxo de Caixa</h3>
+            <p>Entrada: R$ 50.000</p>
+            <p>Saída: R$ 30.000</p>
+            <div class="bar-container">
+                <div class="bar positive-bar" style="width: 66%"></div>
+                <div class="bar negative-bar" style="width: 34%"></div>
+                <div class="bar-label" style="left: 50%;">66% Entrada</div>
+                <div class="bar-label" style="left: 80%;">34% Saída</div>
+            </div>
+        </div>
+
+        <!-- Status de Transporte Interno -->
+        <div class="dashboard-card">
+            <div class="icon"><i class="fas fa-bus"></i></div>
+            <h3>Status de Transporte</h3>
+            <div class="entry-exit">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Motorista">
+                <p class="entry">Ônibus 1 | Em operação</p>
+            </div>
+            <div class="entry-exit">
+                <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Motorista">
+                <p class="exit">Ônibus 2 | Em manutenção</p>
+            </div>
+            <div class="bar-container">
+                <div class="bar positive-bar" style="width: 80%;"></div>
+                <div class="bar negative-bar" style="width: 20%;"></div>
+                <div class="bar-label" style="left: 50%;">80% Em operação</div>
+                <div class="bar-label" style="left: 10%;">20% Em manutenção</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Adiciona a classe 'active' ao item de menu quando ele é clicado
+        const menuItems = document.querySelectorAll('nav a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(link => link.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
+
